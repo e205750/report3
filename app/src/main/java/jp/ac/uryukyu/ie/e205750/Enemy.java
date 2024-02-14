@@ -1,4 +1,4 @@
-package jp.ac.uryukyu.ie.tnal;
+package jp.ac.uryukyu.ie.e205750;
 
 /**
  * 敵クラス。
@@ -8,30 +8,22 @@ package jp.ac.uryukyu.ie.tnal;
  *  boolean dead; //敵の生死状態。true=死亡。
  * Created by tnal on 2016/11/13.
  */
-public class Enemy extends LivingThing {
-    /**
-     * コンストラクタ。名前、最大HP、攻撃力を指定する。
-     * @param _name モンスター名
-     * @param maximumHP モンスターのHP
-     * @param _attack モンスターの攻撃力
-     */
-    public Enemy (String _name, int maximumHP, int _attack) {
-        super(_name, maximumHP, _attack);
+public class Enemy extends LivingThing{
+    public Enemy(String name, int hitPoint, int attack){
+        super(name, hitPoint, attack);
     }
 
     /**
      * 自身へ攻撃されたときのダメージ処理をするメソッド。
      * 指定されたダメージを hitPoint から引き、死亡判定を行う。
-     * @param damage 受けたダメージ
+ 
      */
     @Override
     public void wounded(int damage){
-        int hitPoint = getHitPoint();
-        setHitPoint(hitPoint -= damage);
-        if( getHitPoint() <= 0 ) {
+        setHitPoint(getHitPoint() - damage);
+        if( getHitPoint() < 0 ) {
             setDead(true);
-            System.out.printf("モンスター%sは倒れた。\n", getName());
+            System.out.printf("モンスター%sは尽きた。\n", getName());
         }
     }
-
 }
